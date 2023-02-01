@@ -82,7 +82,7 @@ class OctopiCache(AbstractRubyCacheHierarchy, AbstractThreeLevelCacheHierarchy):
                 l2_assoc = self._l2_assoc,
                 l3_size = self._l3_size,
                 l3_assoc = self._l3_assoc,
-        ) for core_complex_idx, (address_range, mem_port) in enumerate(board.get_mem_ports())]
+        ) for core_complex_idx in range(self._num_core_complexes)]
 
         self.ruby_system.network.incorporate_ccds(self.core_complexes)
 
