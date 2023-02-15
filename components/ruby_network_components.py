@@ -44,11 +44,12 @@ class RubyExtLink(SimpleExtLink):
         cls._link_id += 1
         return cls._link_id - 1
 
-    def __init__(self, ext_node, int_node):
+    def __init__(self, ext_node, int_node, bandwidth_factor=16):
         super().__init__()
         self.link_id = self._get_link_id()
         self.ext_node = ext_node
         self.int_node = int_node
+        self.bandwidth_factor = bandwidth_factor
 
 class RubyIntLink(SimpleIntLink):
     _link_id = 0
@@ -59,11 +60,12 @@ class RubyIntLink(SimpleIntLink):
         return cls._link_id - 1
 
     @classmethod
-    def create_bidirectional_links(cls, node_1, node_2):
-        return [RubyIntLink(node_1, node_2), RubyIntLink(node_2, node_1)]
+    def create_bidirectional_links(cls, node_1, node_2, bandwidth_factor=16):
+        return [RubyIntLink(node_1, node_2, bandwidth_factor), RubyIntLink(node_2, node_1, bandwidth_factor)]
 
-    def __init__(self, src_node, dst_node):
+    def __init__(self, src_node, dst_node, bandwidth_factor=16):
         super().__init__()
         self.link_id = self._get_link_id()
         self.src_node = src_node
         self.dst_node = dst_node
+        self.bandwidth_factor = bandwidth_factor

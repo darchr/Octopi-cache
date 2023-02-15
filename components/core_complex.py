@@ -161,7 +161,7 @@ class CoreComplex(SubSystem, RubyNetworkComponent):
             self._add_router(cluster.l2_router)
 
         # create an ext link from a controller to a router
-        self.l3_router_link = RubyExtLink(ext_node=self.l3_cache, int_node=self.l3_router)
+        self.l3_router_link = RubyExtLink(ext_node=self.l3_cache, int_node=self.l3_router, bandwidth_factor=64)
         self._add_ext_link(self.l3_router_link)
         for cluster in self.core_clusters:
             cluster.l1_router_link = RubyExtLink(ext_node=cluster.l1_cache, int_node=cluster.l1_router)
@@ -185,7 +185,7 @@ class CoreComplex(SubSystem, RubyNetworkComponent):
             self._add_int_link(l2_to_main)
             self._add_int_link(main_to_l2)
         # create L3/main_router link
-        l3_to_main, main_to_l3 = RubyIntLink.create_bidirectional_links(self.l3_router, self.main_router)
+        l3_to_main, main_to_l3 = RubyIntLink.create_bidirectional_links(self.l3_router, self.main_router, bandwidth_factor=64)
         self.l3_to_main_link = l3_to_main
         self.main_to_l3_link = main_to_l3
         self._add_int_link(l3_to_main)

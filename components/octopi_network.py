@@ -22,7 +22,7 @@ class OctopiNetwork(SimpleNetwork, RubyNetworkComponent):
 
     def connect_ccd_routers_to_cross_ccd_router(self, ccds):
         for ccd in ccds:
-            int_link_1, int_link_2 = RubyIntLink.create_bidirectional_links(self.cross_ccd_router, ccd.get_main_router())
+            int_link_1, int_link_2 = RubyIntLink.create_bidirectional_links(self.cross_ccd_router, ccd.get_main_router(), bandwidth_factor=64)
             ccd.to_cross_ccd_router_link = int_link_1
             ccd.from_cross_ccd_router_link = int_link_2
             self._add_int_link(int_link_1)
