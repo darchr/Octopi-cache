@@ -7,6 +7,9 @@ from gem5.utils.requires import requires
 from gem5.utils.override import overrides
 from gem5.resources.resource import Resource, DiskImageResource
 from gem5.simulate.simulator import Simulator
+from gem5.components.processors.simple_switchable_processor import (
+    SimpleSwitchableProcessor,
+)
 
 from m5.objects import HBM_1000_4H_1x64
 
@@ -44,8 +47,11 @@ memory = ChanneledMemory(
     addr_mapping = None
 )
 
-processor = SimpleProcessor(
-    cpu_type=CPUTypes.TIMING, isa=ISA.RISCV, num_cores=num_cores
+processor = SimpleSwitchableProcessor(
+    starting_core_type=CPUTypes.ATOMIC,
+    switch_core_type=CPUTypes.TIMING, # TODO
+    isa=ISA.RISCV,
+    num_cores=num_cores
 )
 
 class HighPerformanceRiscvBoard(RiscvBoard):
