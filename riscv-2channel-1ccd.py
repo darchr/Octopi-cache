@@ -34,7 +34,7 @@ cache_hierarchy = OctopiCache(
     l2_size  = "512KiB",
     l2_assoc = 8,
     l3_size = "32MiB",
-    l3_assoc = 32,
+    l3_assoc = 16,
     num_core_complexes = 1,
     is_fullsystem = True,
 )
